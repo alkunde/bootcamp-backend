@@ -1,7 +1,10 @@
 const express = require('express');
-const { uuid, isUuid } = require('uuidv4');
+const cors = require('cors');
+const { v4: uuidv4, isUuid } = require('uuid')
 
 const app = express();
+
+app.use(cors());
 app.use(express.json());
 
 const projects = [];
@@ -31,7 +34,7 @@ app.get('/projects', (request, response) => {
 app.post('/projects', (request, response) => {
     const { title, owner } = request.body;
 
-    const project = { id: uuid(), title, owner };
+    const project = { id: uuidv4(), title, owner };
 
     projects.push(project);
 
